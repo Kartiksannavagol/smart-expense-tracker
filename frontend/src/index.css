@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background: radial-gradient(circle at 10% 10%, rgba(255,180,0,0.15), transparent 40%), #050816;
+  color: white;
+  font-family: Inter, sans-serif;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+html{
+  scroll-behavior:smooth;
+}
