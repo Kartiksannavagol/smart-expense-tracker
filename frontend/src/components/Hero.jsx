@@ -59,7 +59,7 @@ function Hero(){
           Know Where <br/>
 
           <span className="text-yellow-400">
-            Every Dollar
+            Every Rupee
           </span>
 
           <br/> Goes.
@@ -78,46 +78,35 @@ function Hero(){
 
         </p>
 
-
-        {/* SAVINGS CARD */}
-
-        <div className="mt-8 bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-6 py-5 w-[340px] flex justify-between items-center">
-
-          <div>
-            <h2 className="text-emerald-400 text-3xl font-bold">
-              $2,847
-            </h2>
-            <p className="text-gray-400 text-sm">
-              avg. savings identified per user / year
-            </p>
-          </div>
-
-          <div className="bg-emerald-400/20 w-10 h-10 rounded-lg flex items-center justify-center">
-            ?
-          </div>
-
-        </div>
-
+        
 
         {/* BUTTONS */}
 
         <div className="flex gap-4 mt-8">
 
-          <button className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold flex items-center gap-2">
+  {/* START TRACKING */}
+  <button
+    onClick={() => {
+      document.getElementById("features").scrollIntoView({
+        behavior: "smooth"
+      });
+    }}
+    className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold flex items-center gap-2"
+  >
+    + Start Tracking Free
+  </button>
 
-            + Start Tracking Free
+  {/* WATCH DEMO */}
+  <button
+    onClick={() => {
+      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+    }}
+    className="border border-gray-700 px-8 py-4 rounded-xl text-gray-300 hover:bg-white/5"
+  >
+    ▶ Watch Demo
+  </button>
 
-          </button>
-
-
-          <button className="border border-gray-700 px-8 py-4 rounded-xl text-gray-300 hover:bg-white/5">
-
-            ▶ Watch Demo
-
-          </button>
-
-        </div>
-
+</div>
       </div>
 
 
@@ -137,7 +126,7 @@ function Hero(){
       </p>
 
       <h2 className="text-3xl font-bold mt-1">
-        $3,241.80
+        ₹32,410
       </h2>
     </div>
 
@@ -198,7 +187,7 @@ function Hero(){
     <p className="text-white font-sm font-semibold">Uber Eats</p>
     <p className="text-gray-400 text-xs">Food & Dining</p>
     <p className="text-red-400 font-semibold">
-      -$32.50
+      -₹3250
     </p>
 
   </div>
@@ -233,7 +222,7 @@ function Hero(){
     </p>
 
     <p className="text-purple-400 font-semibold">
-      -$15.99
+      -₹1599
     </p>
 
   </div>

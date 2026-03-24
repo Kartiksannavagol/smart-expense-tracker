@@ -43,12 +43,7 @@ function Navbar() {
               Insights
             </button>
 
-            <button
-              onClick={() => scrollToSection("pricing")}
-              className="hover:text-white transition"
-            >
-              Pricing
-            </button>
+            
 
           </div>
 
