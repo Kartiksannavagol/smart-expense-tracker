@@ -122,10 +122,21 @@ function Hero() {
   </div>
 
   {/* ALERT */}
-  <div className="absolute top-40 sm:top-60 right-2 sm:right-0 bg-yellow-500/10 border border-yellow-500/30 px-4 py-2 rounded-xl animate-[float_3s_ease-in-out_infinite]">
-    <p className="text-yellow-400 text-sm font-semibold">Spending Alert</p>
-    <p className="text-gray-400 text-xs">Dining 23% above average</p>
-  </div>
+<div className="absolute 
+  bottom-24 sm:top-60 
+  right-2 sm:right-0 
+  bg-yellow-500/10 border border-yellow-500/30 
+  px-4 py-2 rounded-xl 
+  animate-[float_3s_ease-in-out_infinite]"
+>
+  <p className="text-yellow-400 text-sm font-semibold">
+    Spending Alert
+  </p>
+
+  <p className="text-gray-400 text-xs">
+    Dining 23% above average
+  </p>
+</div>
 
   {/* NETFLIX */}
   <div className="absolute bottom-2 right-2 sm:right-16 bg-slate-900 border border-gray-800 px-4 py-3 rounded-xl animate-[float_3s_ease-in-out_infinite]">
