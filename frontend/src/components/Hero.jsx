@@ -1,238 +1,145 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { Truck } from "lucide-react";
-import { Film } from "lucide-react";
-import { formatCurrency } from "../utils/currency";
 import { getExpenses } from "../api/expenses";
 
-
-function Hero(){
+function Hero() {
 
   const alerts = [
     "Groceries on track — 62% of budget used",
     "Dining spending 23% above monthly average",
-    "Entertainment budget exceeded by $12.50"
-  ]
+    "Entertainment budget exceeded by ₹1250"
+  ];
 
-  const [index,setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-  async function loadExpenses() {
-    const data = await getExpenses();
-    setExpenses(data);
-  }
+    async function loadExpenses() {
+      const data = await getExpenses();
+      setExpenses(data);
+    }
+    loadExpenses();
+  }, []);
 
-  loadExpenses();
-}, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % alerts.length);
+    }, 2500);
 
-  useEffect(()=>{
+    return () => clearInterval(interval);
+  }, []);
 
-    const interval=setInterval(()=>{
-      setIndex((prev)=>(prev+1)%alerts.length)
-    },2500)
+  return (
 
-    return ()=>clearInterval(interval)
+    <div className="grid grid-cols-1 lg:grid-cols-2 items-center px-4 sm:px-8 lg:px-24 py-12 lg:py-20 relative">
 
-  },[])
-
-
-  return(
-
-    <div className="grid grid-cols-2 items-center px-24 py-20 relative">
-
-      {/* LEFT SIDE */}
-
+      {/* LEFT */}
       <div>
-
-        {/* ALERT BADGE */}
 
         <div className="bg-yellow-500/10 text-yellow-400 inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 border border-yellow-500/30 text-sm">
           <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
           {alerts[index]}
         </div>
 
-
-        {/* HERO TEXT */}
-
-        <h1 className="text-[70px] font-black leading-[75px] tracking-tight">
-
-          Know Where <br/>
-
-          <span className="text-yellow-400">
-            Every Rupee
-          </span>
-
-          <br/> Goes.
-
+        {/* TEXT */}
+        <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-black leading-tight lg:leading-[75px] tracking-tight">
+          Know Where <br />
+          <span className="text-yellow-400">Every Rupee</span>
+          <br /> Goes.
         </h1>
 
-
-        {/* DESCRIPTION */}
-
         <p className="text-gray-400 mt-6 max-w-xl">
-
           SmartExpense tracks your spending in real-time,
           breaks it down by category, and sends alerts
-          before you overspend — so you stay in control,
-          always.
-
+          before you overspend.
         </p>
 
-        
-
         {/* BUTTONS */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-8">
 
-        <div className="flex gap-4 mt-8">
+          <button
+            onClick={() => {
+              document.getElementById("features")?.scrollIntoView({
+                behavior: "smooth"
+              });
+            }}
+            className="bg-yellow-500 hover:bg-yellow-400 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold"
+          >
+            + Start Tracking Free
+          </button>
 
-  {/* START TRACKING */}
-  <button
-    onClick={() => {
-      document.getElementById("features").scrollIntoView({
-        behavior: "smooth"
-      });
-    }}
-    className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold flex items-center gap-2"
-  >
-    + Start Tracking Free
-  </button>
+         
 
-  {/* WATCH DEMO */}
-  <button
-    onClick={() => {
-      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-    }}
-    className="border border-gray-700 px-8 py-4 rounded-xl text-gray-300 hover:bg-white/5"
-  >
-    ▶ Watch Demo
-  </button>
-
-</div>
+        </div>
       </div>
 
+      {/* RIGHT */}
+      <div className="relative w-full max-w-[620px] h-[400px] mx-auto mt-10 lg:mt-0">
 
+        {/* CHART CARD */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-lg px-6 sm:px-10 py-4 rounded-2xl border border-gray-800 w-full max-w-[620px]">
 
-      {/* RIGHT SIDE */}
+          <div className="flex justify-between items-center">
 
-      <div className="relative w-[620px] h-[420px]">
+            <div>
+              <p className="text-gray-400 text-sm">
+                March 2026 — Total Spent
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-bold mt-1">
+                ₹32,410
+              </h2>
+            </div>
 
-  {/* CHART CARD */}
-<div className="float absolute top-0 left-10 -translate-x-1/2 bg-slate-900/80 backdrop-blur-lg px-10 pt-2 pb-2 rounded-2xl border border-gray-800 w-[620px]">
+            <div className="bg-green-500/10 text-green-400 px-3 sm:px-4 py-1 rounded-full text-sm">
+              ↘ -8.4%
+            </div>
 
-  <div className="flex justify-between items-center">
+          </div>
 
-    <div>
-      <p className="text-gray-400 text-sm">
-        March 2026 — Total Spent
-      </p>
+          {/* BARS */}
+          <div className="mt-6 flex items-end justify-between gap-2 sm:gap-3">
+            {[55,70,50,80,65,45,85,55,70,75,45,70].map((h,i)=>(
+              <div key={i} className={`w-2 sm:w-3 rounded-md ${i===11?"bg-yellow-400":"bg-yellow-600"}`} style={{height:h}}></div>
+            ))}
+          </div>
 
-      <h2 className="text-3xl font-bold mt-1">
-        ₹32,410
-      </h2>
+        </div>
+
+        
+        {/* FLOAT CARDS */}
+<div>
+
+  {/* UBER */}
+  <div className="absolute bottom-2 left-2 sm:left-0 bg-slate-900 border border-gray-800 px-4 py-2 rounded-xl animate-[float_3s_ease-in-out_infinite]">
+    <div className="flex items-center gap-3">
+      <Truck className="w-5 h-5 text-red-400" />
+      <div>
+        <p className="text-white text-sm font-semibold">Uber Eats</p>
+        <p className="text-gray-400 text-xs">Food & Dining</p>
+        <p className="text-red-400 text-sm">-₹3250</p>
+      </div>
     </div>
-
-    <div className="bg-green-500/10 text-green-400 px-4 py-1 rounded-full text-sm">
-      ↘ -8.4%
-    </div>
-
   </div>
 
-
-  {/* Chart Bars */}
-
-  <div className="mt-6">
-
-    <div className="mt-6 flex items-end justify-between gap-3">
-
-  <div className="w-8 h-[55px] bg-yellow-700 rounded-md"></div>
-  <div className="w-8 h-[70px] bg-yellow-600 rounded-md"></div>
-  <div className="w-8 h-[50px] bg-yellow-700 rounded-md"></div>
-  <div className="w-8 h-[80px] bg-yellow-600 rounded-md"></div>
-  <div className="w-8 h-[65px] bg-yellow-700 rounded-md"></div>
-  <div className="w-8 h-[45px] bg-yellow-800 rounded-md"></div>
-  <div className="w-8 h-[85px] bg-yellow-600 rounded-md"></div>
-  <div className="w-8 h-[55px] bg-yellow-700 rounded-md"></div>
-  <div className="w-8 h-[70px] bg-yellow-600 rounded-md"></div>
-  <div className="w-8 h-[75px] bg-yellow-600 rounded-md"></div>
-  <div className="w-8 h-[45px] bg-yellow-800 rounded-md"></div>
-
-  {/* Highlighted Current Month */}
-  <div className="w-8 h-[70px] bg-yellow-400 rounded-md"></div>
-
-</div>
-
-
-    {/* Months */}
-
-    <div className="flex justify-between text-gray-500 text-sm mt-3 px-1">
-      <span>Apr</span>
-      <span>Jun</span>
-      <span>Aug</span>
-      <span>Oct</span>
-      <span>Mar</span>
-    </div>
-
+  {/* ALERT */}
+  <div className="absolute top-40 sm:top-60 right-2 sm:right-0 bg-yellow-500/10 border border-yellow-500/30 px-4 py-2 rounded-xl animate-[float_3s_ease-in-out_infinite]">
+    <p className="text-yellow-400 text-sm font-semibold">Spending Alert</p>
+    <p className="text-gray-400 text-xs">Dining 23% above average</p>
   </div>
-
-</div>
-
-
-  {/* UBER EATS */}
- <div className="float absolute bottom-0 left-0 bg-slate-900 border border-gray-800 px-6 py-0 rounded-xl w-[220px]">
-
-     {/* Icon */}
-   <div className="flex items-center gap-3">
-  <Truck className="w-6 h-6 text-red-400" />
-
-  <div>
-    <p className="text-white font-sm font-semibold">Uber Eats</p>
-    <p className="text-gray-400 text-xs">Food & Dining</p>
-    <p className="text-red-400 font-semibold">
-      -₹3250
-    </p>
-
-  </div>
-</div>
-  </div>
-
-
-  {/* SPENDING ALERT */}
- <div className="float absolute top-60 right-0 bg-yellow-500/10 border border-yellow-500/30 px-6 py-0 rounded-xl w-[250px]">
-
-  <p className="text-yellow-400 text-sm font-semibold">
-    Spending Alert
-  </p>
-
-    <p className="text-gray-400 text-xs">
-      Dining 23% above your monthly average
-    </p>
-
-  </div>
-
 
   {/* NETFLIX */}
-  <div className="float absolute bottom-0 right-16 bg-slate-900 border border-gray-800 px-6 py-4 rounded-xl w-[200px]">
-    
-
-    <h3 className="text-white font-semibold">
-      Netflix
-    </h3>
-
-    <p className="text-gray-400 text-sm">
-      Entertainment
-    </p>
-
-    <p className="text-purple-400 font-semibold">
-      -₹1599
-    </p>
-
+  <div className="absolute bottom-2 right-2 sm:right-16 bg-slate-900 border border-gray-800 px-4 py-3 rounded-xl animate-[float_3s_ease-in-out_infinite]">
+    <h3 className="text-white text-sm font-semibold">Netflix</h3>
+    <p className="text-gray-400 text-xs">Entertainment</p>
+    <p className="text-purple-400 text-sm">-₹1599</p>
   </div>
 
 </div>
 
-</div>
+      </div>
 
-  )
-
+    </div>
+  );
 }
 
-export default Hero
+export default Hero;

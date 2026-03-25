@@ -1,74 +1,104 @@
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
 function Navbar() {
 
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id)
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" })
-    }
-  }
+  const [open, setOpen] = useState(false);
 
   return (
 
     <div className="w-full flex justify-center">
 
-      <div className="w-[1400px] flex items-center justify-between py-6 relative">
+      <div className="w-full max-w-7xl flex items-center justify-between py-4 px-4 sm:px-6 lg:px-8 relative">
 
-        {/* LEFT LOGO */}
-
-        <div
-          onClick={() => scrollToSection("hero")}
-          className="text-xl font-semibold text-white cursor-pointer"
-        >
+        {/* LOGO */}
+        <div className="text-xl font-semibold text-white">
           SmartExpense
         </div>
 
+        {/* DESKTOP MENU */}
+        <div className="hidden md:flex bg-white/5 border border-white/10 backdrop-blur-md rounded-full px-6 py-2 gap-8 text-gray-400">
 
-        {/* CENTER MENU */}
+          <button
+            onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+            className="hover:text-white transition"
+          >
+            Features
+          </button>
 
-        <div className="absolute left-1/2 -translate-x-1/2">
+          <button
+            onClick={() => document.getElementById("insights")?.scrollIntoView({ behavior: "smooth" })}
+            className="hover:text-white transition"
+          >
+            Insights
+          </button>
 
-          <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-full px-8 py-3 flex gap-10 text-gray-400">
-
-            <button
-              onClick={() => scrollToSection("features")}
-              className="hover:text-white transition"
-            >
-              Features
-            </button>
-
-            <button
-              onClick={() => scrollToSection("insights")}
-              className="hover:text-white transition"
-            >
-              Insights
-            </button>
-
-            
-
-          </div>
+          <button className="hover:text-white transition">
+            Pricing
+          </button>
 
         </div>
 
-
         {/* RIGHT BUTTON */}
+        <div className="hidden md:block">
+          <button
+            onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+            className="bg-yellow-500 hover:bg-yellow-400 text-black px-5 py-2 rounded-full font-semibold"
+          >
+            Get Started
+          </button>
+        </div>
 
-        <div className="flex items-center gap-4">
+        {/* MOBILE MENU BUTTON */}
+        <div className="md:hidden">
+          <button onClick={() => setOpen(!open)}>
+            {open ? <X className="text-white" /> : <Menu className="text-white" />}
+          </button>
+        </div>
+
+      </div>
+
+      {/* MOBILE DROPDOWN */}
+      {open && (
+        <div className="absolute top-16 left-0 w-full bg-slate-900 border-t border-gray-800 flex flex-col items-center gap-6 py-6 md:hidden z-50">
 
           <button
-            onClick={() => scrollToSection("features")}
-            className="bg-yellow-500 hover:bg-yellow-400 text-black px-5 py-2 rounded-full font-semibold ml-4"
+            onClick={() => {
+              setOpen(false);
+              document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="text-gray-300 hover:text-white"
+          >
+            Features
+          </button>
+
+          <button
+            onClick={() => {
+              setOpen(false);
+              document.getElementById("insights")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="text-gray-300 hover:text-white"
+          >
+            Insights
+          </button>
+
+          
+
+          <button
+            onClick={() => {
+              setOpen(false);
+              document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="bg-yellow-500 text-black px-6 py-2 rounded-full font-semibold"
           >
             Get Started
           </button>
 
         </div>
-
-      </div>
+      )}
 
     </div>
-
-  )
-
+  );
 }
 
-export default Navbar
+export default Navbar;

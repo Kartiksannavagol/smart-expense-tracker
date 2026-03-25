@@ -11,28 +11,25 @@ function CTA() {
 
   return (
 
-    <section id="pricing" className="px-24 py-32">
+    <section id="pricing" className="px-4 sm:px-6 lg:px-12 py-16">
 
-      <div className="bg-slate-900/70 backdrop-blur-lg border border-gray-800 rounded-3xl p-20 text-center relative overflow-hidden">
+      <div className="bg-slate-900/70 backdrop-blur-lg border border-gray-800 rounded-3xl p-8 sm:p-12 lg:p-16 text-center relative overflow-hidden">
 
-        {/* Icon */}
-
+        {/* ICON */}
         <div className="flex justify-center mb-6">
 
-          <div className="bg-yellow-500/10 border border-yellow-500/30 w-14 h-14 rounded-xl flex items-center justify-center">
+          <div className="bg-yellow-500/10 border border-yellow-500/30 w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center">
 
-            <Sparkles className="text-yellow-400" size={24} />
+            <Sparkles className="text-yellow-400" size={22} />
 
           </div>
 
         </div>
 
+        {/* HEADING */}
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
 
-        {/* Heading */}
-
-        <h2 className="text-6xl font-bold leading-tight">
-
-          Start Knowing <br/>
+          Start Knowing <br />
 
           <span className="text-yellow-400">
             Your Money.
@@ -40,34 +37,28 @@ function CTA() {
 
         </h2>
 
+        {/* DESCRIPTION */}
+        <p className="text-gray-400 mt-4 text-sm sm:text-base lg:text-lg">
 
-        {/* Description */}
-
-        <p className="text-gray-400 mt-6 text-lg">
-
-          Join 47,000+ people who track smarter with SmartExpense. <br/>
+          Join 47,000+ people who track smarter with SmartExpense. <br className="hidden sm:block"/>
           Free forever. No credit card. No excuses.
 
         </p>
 
-
-        {/* Button */}
-
-        <div className="mt-10">
+        {/* BUTTON */}
+        <div className="mt-8">
 
           <button
             onClick={scrollToFeatures}
-            className="bg-yellow-500 hover:bg-yellow-400 text-black px-10 py-4 rounded-full text-lg font-semibold transition"
+            className="bg-yellow-500 hover:bg-yellow-400 text-black px-6 sm:px-8 py-3 rounded-full text-sm sm:text-base font-semibold transition"
           >
             Get Started Free →
           </button>
 
         </div>
 
-
-        {/* Features */}
-
-        <div className="flex justify-center gap-10 mt-8 text-gray-400 text-sm">
+        {/* FEATURES */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-6 text-gray-400 text-xs sm:text-sm">
 
           <div className="flex items-center gap-2">
             <Check className="text-emerald-400" size={16}/>

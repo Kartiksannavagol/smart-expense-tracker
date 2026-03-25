@@ -13,7 +13,6 @@ export default function StatsSection() {
   const [budget, setBudget] = useState(5000);
 
   useEffect(() => {
-
     loadExpenses();
 
     const refreshExpenses = () => {
@@ -25,7 +24,6 @@ export default function StatsSection() {
     return () => {
       window.removeEventListener("expenseAdded", refreshExpenses);
     };
-
   }, []);
 
   const loadExpenses = async () => {
@@ -47,7 +45,6 @@ export default function StatsSection() {
   };
 
   const handleEdit = async (id, newAmount) => {
-
     const expense = expenses.find((e) => e._id === id);
 
     try {
@@ -59,7 +56,6 @@ export default function StatsSection() {
       });
 
       loadExpenses();
-
     } catch (error) {
       console.error("Failed to update expense", error);
     }
@@ -71,10 +67,9 @@ export default function StatsSection() {
   );
 
   const totalSpent = expenses.reduce((total, exp) => total + exp.amount, 0);
-
   const progress = Math.min((totalSpent / budget) * 100, 100);
 
-  // 🔥 Top Category
+  // Top Category
   const categoryTotals = {};
   expenses.forEach((exp) => {
     categoryTotals[exp.category] =
@@ -91,16 +86,13 @@ export default function StatsSection() {
     }
   });
 
-  // ✅ FIXED PDF EXPORT
+  // PDF Export
   const exportToPDF = () => {
-
     const doc = new jsPDF();
 
-    // Title
     doc.setFontSize(18);
     doc.text("Smart Expense Tracker Report", 105, 20, { align: "center" });
 
-    // Date
     doc.setFontSize(10);
     doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 28);
 
@@ -109,7 +101,7 @@ export default function StatsSection() {
     const tableRows = expenses.map((exp) => [
       exp.description,
       exp.category,
-      `Rs. ${exp.amount}`,   // ✅ FIXED
+      `Rs. ${exp.amount}`,
       exp.date,
     ]);
 
@@ -117,12 +109,11 @@ export default function StatsSection() {
       head: [tableColumn],
       body: tableRows,
       startY: 35,
-      theme: "striped",   // ✅ CLEAN UI
+      theme: "striped",
     });
 
-    // Total
     doc.text(
-      `Total Spent: Rs. ${totalSpent}`,   // ✅ FIXED
+      `Total Spent: Rs. ${totalSpent}`,
       14,
       doc.lastAutoTable.finalY + 10
     );
@@ -131,34 +122,36 @@ export default function StatsSection() {
   };
 
   return (
-    <section id="insights" className="px-10 py-24">
+    <section id="insights" className="px-4 sm:px-6 lg:px-10 py-16">
 
       {/* Heading */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-12">
         <div className="inline-block px-4 py-1 border border-yellow-500/30 text-yellow-400 rounded-full text-sm mb-4">
           ● TRANSACTIONS
         </div>
 
-        <h2 className="text-5xl font-bold text-white">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
           Track your <br />
           <span className="text-yellow-400">recent expenses.</span>
         </h2>
       </div>
 
       {/* Budget */}
-      <div className="bg-slate-900 border border-gray-800 rounded-2xl p-6 mb-8">
+      <div className="bg-slate-900 border border-gray-800 rounded-2xl p-4 sm:p-6 mb-6">
 
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <p className="text-gray-400 text-sm">Monthly Budget</p>
-            <h3 className="text-2xl font-bold text-white">Rs. {budget}</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              Rs. {budget}
+            </h3>
           </div>
 
           <input
             type="number"
             value={budget}
             onChange={(e) => setBudget(Number(e.target.value))}
-            className="bg-slate-800 px-4 py-2 rounded-lg text-white w-[150px]"
+            className="bg-slate-800 px-4 py-2 rounded-lg text-white w-full sm:w-[150px]"
           />
         </div>
 
@@ -176,46 +169,48 @@ export default function StatsSection() {
         </div>
 
         {totalSpent > budget && (
-          <p className="text-red-400 mt-2">
+          <p className="text-red-400 mt-2 text-sm">
             ⚠ Budget exceeded by Rs. {totalSpent - budget}
           </p>
         )}
       </div>
 
       {/* Top Category */}
-      <div className="bg-slate-900 border border-gray-800 rounded-2xl p-6 mb-8">
+      <div className="bg-slate-900 border border-gray-800 rounded-2xl p-4 sm:p-6 mb-6">
         <p className="text-gray-400 text-sm">Top Spending Category</p>
-        <h3 className="text-yellow-400 text-xl font-bold">{topCategory}</h3>
-        <p className="text-gray-400">Rs. {topAmount} spent</p>
+        <h3 className="text-yellow-400 text-lg sm:text-xl font-bold">
+          {topCategory}
+        </h3>
+        <p className="text-gray-400 text-sm">
+          Rs. {topAmount} spent
+        </p>
       </div>
 
       {/* Transactions */}
-      <div className="bg-slate-900 border border-gray-800 rounded-2xl p-8">
+      <div className="bg-slate-900 border border-gray-800 rounded-2xl p-4 sm:p-8">
 
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
 
           <div>
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
               Recent Transactions
             </h3>
             <p className="text-gray-500 text-sm">Live feed</p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
 
-            {/* Search */}
             <input
               type="text"
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-slate-800 px-4 py-2 rounded-lg text-white"
+              className="bg-slate-800 px-4 py-2 rounded-lg text-white w-full sm:w-auto"
             />
 
-            {/* Export PDF */}
             <button
               onClick={exportToPDF}
-              className="bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold"
+              className="bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold w-full sm:w-auto"
             >
               Export PDF
             </button>
@@ -224,7 +219,7 @@ export default function StatsSection() {
 
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
 
           {filteredExpenses.length === 0 ? (
             <p className="text-gray-500">No transactions found</p>
@@ -247,17 +242,18 @@ export default function StatsSection() {
       </div>
 
       {/* Charts */}
-      <ExpenseChart expenses={expenses} />
-      <MonthlyCharts expenses={expenses} />
+      <div className="mt-10 space-y-10">
+        <ExpenseChart expenses={expenses} />
+        <MonthlyCharts expenses={expenses} />
+      </div>
 
     </section>
   );
 }
 
 function Transaction({ id, name, category, price, onDelete, onEdit }) {
-
   return (
-    <div className="flex justify-between items-center bg-slate-800 p-4 rounded-xl">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-800 p-4 rounded-xl gap-3">
 
       <div>
         <p className="text-white">{name}</p>
@@ -265,7 +261,6 @@ function Transaction({ id, name, category, price, onDelete, onEdit }) {
       </div>
 
       <div className="flex items-center gap-4">
-
         <p className="text-teal-400">{price}</p>
 
         <button
@@ -285,7 +280,6 @@ function Transaction({ id, name, category, price, onDelete, onEdit }) {
         >
           🗑
         </button>
-
       </div>
 
     </div>

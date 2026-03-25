@@ -41,68 +41,50 @@ function MonthlyCharts({ expenses = [] }) {
   }
 
   const months = [
-    "All",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
+    "All","Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
   ]
 
   return (
 
-    <section className="px-24 py-32">
+    <section className="px-4 sm:px-6 lg:px-12 py-16">
 
-      {/* Centered Header */}
+      {/* HEADER */}
+      <div className="text-center mb-10">
 
-      <div className="text-center mb-14">
-
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-full text-sm mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-full text-sm mb-4">
           ● SPENDING TRENDS
         </div>
 
-        <h2 className="text-5xl font-bold leading-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
           Monthly <span className="text-purple-400">Spending Analysis</span>
         </h2>
 
       </div>
 
-
-      {/* Month Selector */}
-
-      <div className="flex justify-center mb-10">
+      {/* MONTH SELECT */}
+      <div className="flex justify-center mb-8">
 
         <select
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
-          className="bg-slate-900 border border-gray-700 text-white px-5 py-3 rounded-xl hover:border-purple-400 transition"
+          className="bg-slate-900 border border-gray-700 text-white px-4 py-2 rounded-lg text-sm sm:text-base"
         >
-
           {months.map((month) => (
             <option key={month} value={month}>
               {month}
             </option>
           ))}
-
         </select>
 
       </div>
 
-
-      {/* Chart Card */}
-
+      {/* CHART */}
       <div className="flex justify-center">
 
-        <div className="bg-slate-900/70 backdrop-blur-lg border border-gray-800 rounded-3xl p-12 w-[900px] shadow-xl">
+        <div className="w-full max-w-4xl bg-slate-900/70 backdrop-blur-lg border border-gray-800 rounded-3xl p-4 sm:p-8 shadow-xl">
 
-          <div style={{ width: "100%", height: 380 }}>
+          <div className="w-full h-[280px] sm:h-[350px]">
 
             {data.length === 0 ? (
 
@@ -112,7 +94,7 @@ function MonthlyCharts({ expenses = [] }) {
 
             ) : (
 
-              <ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
 
                 <BarChart data={data}>
 
@@ -127,21 +109,13 @@ function MonthlyCharts({ expenses = [] }) {
                   <Legend />
 
                   <Bar dataKey="food" fill="#fb7185" radius={[6,6,0,0]} />
-
                   <Bar dataKey="grocery" fill="#34d399" radius={[6,6,0,0]} />
-
                   <Bar dataKey="transport" fill="#60a5fa" radius={[6,6,0,0]} />
-
                   <Bar dataKey="fun" fill="#a78bfa" radius={[6,6,0,0]} />
-
                   <Bar dataKey="shopping" fill="#facc15" radius={[6,6,0,0]} />
-
                   <Bar dataKey="health" fill="#22c55e" radius={[6,6,0,0]} />
-
                   <Bar dataKey="bills" fill="#f97316" radius={[6,6,0,0]} />
-
                   <Bar dataKey="travel" fill="#14b8a6" radius={[6,6,0,0]} />
-
                   <Bar dataKey="other" fill="#e879f9" radius={[6,6,0,0]} />
 
                 </BarChart>

@@ -39,11 +39,14 @@ function ExpenseChart({ expenses = [] }) {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
+        position: "bottom",
         labels: {
           color: "#e5e7eb",
-          font: { size: 14 }
+          font: { size: 12 }
         }
       }
     },
@@ -55,25 +58,27 @@ function ExpenseChart({ expenses = [] }) {
 
   return (
 
-    <section className="px-24 py-28">
+    <section className="px-4 sm:px-6 lg:px-12 py-16">
 
-      <div className="text-center mb-14">
+      {/* HEADER */}
+      <div className="text-center mb-10">
 
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 rounded-full text-sm mb-5">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 rounded-full text-sm mb-4">
           ● CATEGORY ANALYSIS
         </div>
 
-        <h2 className="text-5xl font-bold">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
           Spending by <span className="text-yellow-400">Category</span>
         </h2>
 
       </div>
 
+      {/* CHART */}
       <div className="flex justify-center">
 
-        <div className="bg-slate-900/70 backdrop-blur-lg border border-gray-800 p-10 rounded-3xl shadow-xl">
+        <div className="w-full max-w-md bg-slate-900/70 backdrop-blur-lg border border-gray-800 p-6 sm:p-8 rounded-3xl shadow-xl">
 
-          <div style={{ width: 420 }}>
+          <div className="w-full h-[280px] sm:h-[350px]">
             <Pie data={data} options={options} />
           </div>
 
